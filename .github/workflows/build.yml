@@ -26,4 +26,4 @@ jobs:
       run: pytest tests.py
 
     - name: Construir imagen de la aplicación
-      run: docker build -t testeandoloco-py .
+      run: docker build -t testeandoloco-py:v1 .
