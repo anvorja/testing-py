@@ -1,4 +1,4 @@
-name: Construir imagen de la aplicación
+name: Construir imagen de la aplicación y publicarla
 
 on:
   push:
@@ -27,3 +27,9 @@ jobs:
 
     - name: Construir imagen de la aplicación
       run: docker build -t testeandoloco-py .
+
+    - name: Push Docker image to Docker Hub
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p "${{ secrets.DOCKERHUB_TOKEN }}"
+        docker tag testeandoloco-py ${{ secrets.DOCKERHUB_USERNAME }}/testeandoloco-py
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/testeandoloco-py
