@@ -1,0 +1,22 @@
+name: Publicar imagen en Docker Hub
+
+on:
+  workflow_run:
+    workflows: ["Construir imagen de la aplicación"]
+    types:
+      - completed
+
+jobs:
+  publish-docker-image:
+    name: Publicar imagen en Docker Hub
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Iniciar sesión en Docker Hub
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      
+    - name: Etiquetar la imagen
+      run: docker tag testeandoloco-py ${{ secrets.DOCKERHUB_USERNAME }}/testeandoloco-py:latest
+
+    - name: Publicar imagen en Docker Hub
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/testeandoloco-py:latest

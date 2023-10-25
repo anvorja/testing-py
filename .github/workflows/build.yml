@@ -1,10 +1,13 @@
-name: Pruebas de funciones Python
+name: Construir imagen de la aplicación
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  test-python-functions:
-    name: Pruebas de funciones en Python
+  build-docker-image:
+    name: Construir imagen de la aplicación
     runs-on: ubuntu-latest
 
     steps:
@@ -22,5 +25,5 @@ jobs:
     - name: Ejecutar pruebas
       run: pytest tests.py
 
-    - name: Construye imagen de la aplicación
+    - name: Construir imagen de la aplicación
       run: docker build -t testeandoloco-py .
