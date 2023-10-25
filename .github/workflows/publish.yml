@@ -15,7 +15,8 @@ jobs:
     - name: Iniciar sesión en Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p "${{ secrets.DOCKERHUB_PASSWORD }}"
       
-
+    - name: Etiquetar la imagen
+      run: docker tag testeandoloco-py:v1 ${{ secrets.DOCKERHUB_USERNAME }}/testeandoloco-py:v1
 
     - name: Publicar imagen en Docker Hub
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/testeandoloco-py:v1
